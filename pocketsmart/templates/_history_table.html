@@ -1,0 +1,16 @@
+{% if history %}
+<table>
+  <tr><th>Planner</th><th>Budget</th><th>Estimated total</th><th>Date</th><th></th></tr>
+  {% for h in history %}
+  <tr>
+    <td>{{ h.category|capitalize }}</td>
+    <td>Rs {{ '{:,}'.format(h.inputs.budget) }}</td>
+    <td>Rs {{ '{:,}'.format(h.result.total) }}</td>
+    <td>{{ h.created_at }}</td>
+    <td><a href="/recommendations-details/{{ h.id }}">Open</a></td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+<p>No plans yet. Choose a planner above to create your first one.</p>
+{% endif %}

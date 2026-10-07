@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Home planner · PocketSmart AI{% endblock %}
+{% block content %}
+<h2>Home interior planner</h2>
+{% if error %}<div class="alert">{{ error }}</div>{% endif %}
+<form class="card" method="post" action="/generate-home">
+  <label for="b">Total budget (Rs)</label><input id="b" name="budget" type="number" min="5000" step="500" required>
+  <label>Rooms</label>
+  <div class="checks">
+    {% for r in ["Living Room","Kitchen","Bedroom","Dining Room","Study","Balcony"] %}
+    <label><input type="checkbox" name="rooms" value="{{ r }}"> {{ r }}</label>
+    {% endfor %}
+  </div>
+  <label>Quantities</label>
+  <div class="row">
+    <div><small>Lights</small><input name="lights" type="number" min="0" value="0"></div>
+    <div><small>Ceiling fans</small><input name="fans" type="number" min="0" value="0"></div>
+    <div><small>Dining tables</small><input name="tables" type="number" min="0" value="0"></div>
+    <div><small>Beds</small><input name="beds" type="number" min="0" value="0"></div>
+    <div><small>Sofas</small><input name="sofas" type="number" min="0" value="0"></div>
+  </div>
+  <label for="s">Style</label>
+  <select id="s" name="style"><option>Modern</option><option>Minimalist</option><option>Traditional</option><option>Scandinavian</option><option>Industrial</option></select>
+  <button class="btn" type="submit">Plan my home</button>
+</form>
+{% endblock %}

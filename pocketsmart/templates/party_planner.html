@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Party planner · PocketSmart AI{% endblock %}
+{% block content %}
+<h2>Party planner</h2>
+{% if error %}<div class="alert">{{ error }}</div>{% endif %}
+<form class="card" method="post" action="/generate-party">
+  <label for="e">Event type</label>
+  <select id="e" name="event_type"><option>Birthday</option><option>Corporate</option><option>Wedding</option><option>Anniversary</option><option>Housewarming</option><option>Get-together</option></select>
+  <div class="row">
+    <div><label for="b">Total budget (Rs)</label><input id="b" name="budget" type="number" min="5000" step="500" required></div>
+    <div><label for="g">Guests</label><input id="g" name="guests" type="number" min="1" max="2000" required></div>
+  </div>
+  <label for="v">Venue details</label><input id="v" name="venue" placeholder="e.g. Trichy, home terrace, need 2 hotel rooms">
+  <button class="btn" type="submit">Plan my party</button>
+</form>
+{% endblock %}

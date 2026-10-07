@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <h1>Spend what you planned. Get more for it.</h1>
+  <p>Tell PocketSmart your budget and what you need. It builds a shopping plan for your home, your party or your outfit, with picks from Amazon, Flipkart, IKEA, Swiggy, Zomato and OYO.</p>
+  <a class="btn" href="{{ '/dashboard' if user else '/register' }}">{{ 'Open dashboard' if user else 'Create a free account' }}</a>
+</section>
+<div class="grid">
+  <a class="panel link" href="/home-planner"><h3>Home interior planner</h3><p>Lights, fans, tables and decor for each room, within your budget.</p></a>
+  <a class="panel link" href="/party-planner"><h3>Party planner</h3><p>Catering, decoration and entertainment split to suit your event and guest count.</p></a>
+  <a class="panel link" href="/jewelry-planner"><h3>Jewelry planner</h3><p>Pieces matched to the occasion. Upload your outfit for colour matching.</p></a>
+</div>
+<section>
+  <h2>What users say</h2>
+  <div class="grid">
+    <div class="panel"><blockquote>I furnished our living room under my limit and did not have to open ten tabs.<cite>Priya, Chennai</cite></blockquote></div>
+    <div class="panel"><blockquote>The party plan split the budget in a way I would never have thought of. Guests loved the food.<cite>Arun, Coimbatore</cite></blockquote></div>
+    <div class="panel"><blockquote>I uploaded my saree photo and the jewelry suggestions actually matched.<cite>Meera, Trichy</cite></blockquote></div>
+  </div>
+  <p><small>Sample testimonials. Replace them with real reviews before launch.</small></p>
+</section>
+{% endblock %}

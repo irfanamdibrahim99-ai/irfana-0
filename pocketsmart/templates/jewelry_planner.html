@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Jewelry planner · PocketSmart AI{% endblock %}
+{% block content %}
+<h2>Jewelry planner</h2>
+{% if error %}<div class="alert">{{ error }}</div>{% endif %}
+<form class="card" method="post" action="/generate-jewelry" enctype="multipart/form-data">
+  <label for="b">Budget (Rs)</label><input id="b" name="budget" type="number" min="500" step="100" required>
+  <label for="o">Occasion</label>
+  <select id="o" name="occasion"><option>Wedding</option><option>Festival</option><option>Office</option><option>Party</option><option>Casual outing</option><option>Gift</option></select>
+  <label for="s">Style</label>
+  <select id="s" name="style"><option>Elegant</option><option>Traditional</option><option>Minimal</option><option>Statement</option><option>Antique</option></select>
+  <label for="f">Outfit photo (optional, JPG/PNG/WebP, max 5 MB)</label>
+  <input id="f" name="outfit" type="file" accept="image/jpeg,image/png,image/webp">
+  <button class="btn" type="submit">Find jewelry</button>
+</form>
+{% endblock %}

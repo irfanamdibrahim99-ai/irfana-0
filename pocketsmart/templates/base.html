@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}PocketSmart AI{% endblock %}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="/">Pocket<b>Smart</b> AI</a>
+  {% if user %}
+    <a href="/dashboard">Dashboard</a><a href="/home-planner">Home</a><a href="/party-planner">Party</a>
+    <a href="/jewelry-planner">Jewelry</a><a href="/history">History</a><a href="/logout">Log out</a>
+  {% else %}
+    <a href="/login">Log in</a><a href="/register">Create account</a>
+  {% endif %}
+</div></nav>
+<main><div class="wrap">{% block content %}{% endblock %}</div></main>
+<footer class="site-footer"><div class="wrap">
+  <span>PocketSmart AI: budget-first recommendations powered by Gemini.</span>
+  <span>Prices are estimates. Check each platform before you buy.</span>
+</div></footer>
+</body>
+</html>

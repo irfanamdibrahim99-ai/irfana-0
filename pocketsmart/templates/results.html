@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Your {{ category }} plan · PocketSmart AI{% endblock %}
+{% block content %}
+{% set colors = ["#0f766e","#f2a900","#10231f","#7c9a92","#c2410c","#4f46e5","#9d174d","#65a30d"] %}
+<h2>Your {{ category }} plan</h2>
+<p>{{ result.summary }}</p>
+{% if result.fallback %}<div class="alert note">AI suggestions were unavailable, so these are default picks scaled to your budget.</div>{% endif %}
+{% if result.over_budget %}<div class="alert note">This plan is Rs {{ '{:,}'.format(-result.remaining) }} over budget. Remove an item or raise your budget.</div>{% endif %}
+
+<div class="totals">
+  <div><strong>Rs {{ '{:,}'.format(result.budget) }}</strong>Budget</div>
+  <div><strong>Rs {{ '{:,}'.format(result.total) }}</strong>Estimated total</div>
+  <div><strong>Rs {{ '{:,}'.format(result.remaining if result.remaining > 0 else 0) }}</strong>Left over</div>
+</div>
+
+<div class="bar" role="img" aria-label="Budget split by category">
+  {% for cat, amt in result.groups.items() %}
+  <span style="width:{{ (amt / [result.budget, result.total]|max * 100)|round(1) }}%;background:{{ colors[loop.index0 % colors|length] }}" title="{{ cat }}: Rs {{ '{:,}'.format(amt) }}"></span>
+  {% endfor %}
+</div>
+<div class="legend">
+  {% for cat, amt in result.groups.items() %}
+  <span><i style="background:{{ colors[loop.index0 % colors|length] }}"></i>{{ cat }}: Rs {{ '{:,}'.format(amt) }}</span>
+  {% endfor %}
+</div>
+
+<h2 style="margin-top:32px">Recommended items</h2>
+<div class="cards">
+  {% for it in result["items"] %}
+  <article class="panel item">
+    <div class="meta"><span>{{ it.category }}</span><span class="tag">{{ it.platform|capitalize }}</span></div>
+    <h3>{{ it.name }}</h3>
+    <p class="price">Rs {{ '{:,}'.format(it.estimated_price) }}</p>
+    <p>{{ it.reason }}</p>
+    <p><a href="{{ it.link }}" target="_blank" rel="noopener">Search on {{ it.platform|capitalize }}</a></p>
+  </article>
+  {% endfor %}
+</div>
+
+{% if result.tips %}
+<h2 style="margin-top:32px">Ways to save</h2>
+<ul>{% for t in result.tips %}<li>{{ t }}</li>{% endfor %}</ul>
+{% endif %}
+<p><a class="btn" href="/{{ category }}-planner">Plan again</a> <a class="btn ghost" href="/history">View history</a></p>
+{% endblock %}
